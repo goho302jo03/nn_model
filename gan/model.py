@@ -13,10 +13,10 @@ from keras.datasets import mnist
 class GAN():
 
     def __init__(self):
-        self.latent_dim = 100
-        self.img_rows = 28
-        self.img_cols = 28
-        self.img_channel = 1
+        self.latent_dim = 50
+        self.img_rows = 64   # mnist: 28
+        self.img_cols = 64   # mnist: 28
+        self.img_channel = 3 # mnist: 1
         self.img_shape = (self.img_rows, self.img_cols, self.img_channel)
 
         self.generator, _ = self.build_generator()
@@ -61,18 +61,22 @@ class GAN():
         return model
 
     def train(self, epochs, batch_size):
-        # imgs = []
-        # data_path = os.path.join('./data/images/', '*g')
-        # files = glob.glob(data_path)
-        #
-        # for file in files:
-        #     img = cv2.imread(file)
-        #     imgs.append(img)
-        #
-        # imgs = np.array(imgs)
-        (real_imgs_x, _), (_, _) = mnist.load_data()
-        real_imgs_x = np.reshape(real_imgs_x, (-1,28,28,1))/127.5 - 1
-        # real_imgs_x = imgs
+
+        # dataset: 2D face
+        real_imgs_x = []
+        data_path = os.path.join('./data/images/', '*g')
+        files = glob.glob(data_path)
+
+        for file in files:
+            img = cv2.imread(file)
+            real_imgs_x.append(img)
+
+        # dataset: mnist
+        # (real_imgs_x, _), (_, _) = mnist.load_data()
+        # real_imgs_x = np.reshape(real_imgs_x, (-1, 28, 28, 1))
+
+        real_imgs_x = np.array(real_imgs_x)/127.5 - 1
+
         valid_y = np.ones(batch_size)
         fake_y = np.zeros(batch_size)
 
@@ -84,16 +88,16 @@ class GAN():
             # train discriminator
             print('discriminator')
 
-            # for k in range(5):
-            idx = np.random.randint(0, np.shape(real_imgs_x)[0], batch_size)
-            imgs = real_imgs_x[idx]
-            noise = np.random.normal(0, 1, (batch_size, self.latent_dim))
+            for k in range(3):
+                idx = np.random.randint(0, np.shape(real_imgs_x)[0], batch_size)
+                imgs = real_imgs_x[idx]
+                noise = np.random.normal(0, 1, (batch_size, self.latent_dim))
 
-            fake_imgs = self.generator.predict(noise)
-            dis_loss_real = self.discriminator.train_on_batch(imgs, valid_y)
-            dis_loss_fake = self.discriminator.train_on_batch(fake_imgs, fake_y)
-            print(np.shape(fake_imgs))
-            print('loss: ', 0.5 * (dis_loss_real[0] + dis_loss_fake[0]), ', accuracy: ', 0.5 * (dis_loss_real[1] + dis_loss_fake[1]))
+                fake_imgs = self.generator.predict(noise)
+                dis_loss_real = self.discriminator.train_on_batch(imgs, valid_y)
+                dis_loss_fake = self.discriminator.train_on_batch(fake_imgs, fake_y)
+                print(np.shape(fake_imgs))
+                print('loss: ', 0.5 * (dis_loss_real[0] + dis_loss_fake[0]), ', accuracy: ', 0.5 * (dis_loss_real[1] + dis_loss_fake[1]))
 
             # train generator
             print('generator')
@@ -107,5 +111,5 @@ class GAN():
 
 if __name__ == '__main__':
     gan = GAN()
-    gan.train(100000, 32)
+    gan.train(100000, 128)
 
