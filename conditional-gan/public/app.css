@@ -1,0 +1,11 @@
+.navbar {
+  padding: 20px 0 50px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.pic {
+  padding: 4vw;
+  width: 19.5vw;
+  height: 19.5vw;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>cgan demo</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.css" rel="stylesheet" type="text/css">
+  <link href="app.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="navbar">
+    <select class="ui dropdown hair">
+      <option value="">Hair Color</option>
+      <option value="red">red</option>
+      <option value="brown">brown</option>
+      <option value="aqua">aqua</option>
+      <option value="white">white</option>
+      <option value="black">black</option>
+      <option value="pink">pink</option>
+      <option value="orange">orange</option>
+      <option value="green">green</option>
+      <option value="purple">purple</option>
+      <option value="gray">gray</option>
+      <option value="blonde">blonde</option>
+      <option value="blue">blue</option>
+    </select>
+
+    <select class="ui dropdown eye">
+      <option value="">Eye Color</option>
+      <option value="pink">pink</option>
+      <option value="orange">orange</option>
+      <option value="green">green</option>
+      <option value="red">red</option>
+      <option value="purple">purple</option>
+      <option value="yellow">yellow</option>
+      <option value="aqua">aqua</option>
+      <option value="brown">brown</option>
+      <option value="blue">blue</option>
+      <option value="black">black</option>
+    </select>
+    <button class="ui button generate" type="submit">generate</button>
+  </div>
+  <div id="main">
+    <img class="pic" id="img0" src="./result/0.jpg">
+    <img class="pic" id="img1" src="./result/1.jpg">
+    <img class="pic" id="img2" src="./result/2.jpg">
+    <img class="pic" id="img3" src="./result/3.jpg">
+    <img class="pic" id="img4" src="./result/4.jpg">
+    <img class="pic" id="img5" src="./result/5.jpg">
+    <img class="pic" id="img6" src="./result/6.jpg">
+    <img class="pic" id="img7" src="./result/7.jpg">
+    <img class="pic" id="img8" src="./result/8.jpg">
+    <img class="pic" id="img9" src="./result/9.jpg">
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
