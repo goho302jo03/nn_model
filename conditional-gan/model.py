@@ -176,5 +176,5 @@ class GAN():
 
 if __name__ == '__main__':
     gan = GAN()
-    gan.train(100000, 128)
+    gan.train(100, 128)
 

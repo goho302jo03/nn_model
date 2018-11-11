@@ -5,7 +5,7 @@ import numpy as np
 from keras.models import load_model
 
 def main():
-    model = load_model('./public/generator.h5')
+    model = load_model('./public/' + sys.argv[1])
     latent_dim = 100
     img_shape = (64, 64, 3)
 
@@ -14,8 +14,8 @@ def main():
     with open('./public/le_hair.pkl', 'rb') as f:
         le_hair = pickle.load(f)
 
-    hair_idx = le_hair[sys.argv[1]]
-    eye_idx = le_eye[sys.argv[2]]
+    hair_idx = le_hair[sys.argv[2]]
+    eye_idx = le_eye[sys.argv[3]]
     hair_hot = [0]*12
     eye_hot = [0]*10
     hair_hot[hair_idx] = 1

@@ -13,6 +13,7 @@ $(document).ready(function() {
       method: "get",
       url: "./generate",
       data: {
+        model: $(".model").val(),
         hair: $(".hair").val(),
         eye: $(".eye").val(),
       },
