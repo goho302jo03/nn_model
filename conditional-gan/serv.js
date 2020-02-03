@@ -1,7 +1,7 @@
 const express = require("express")
 const exec = require('child_process').exec
 const app = express()
-const port = 49999
+const port = 5588
 
 app.listen(port)
 app.use(express.static(__dirname + "/public"))
